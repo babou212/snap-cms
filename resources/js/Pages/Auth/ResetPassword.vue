@@ -3,7 +3,7 @@ import GuestLayout from '@/Layouts/GuestLayout.vue';
 import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
-import TextInput from '@/Components/TextInput.vue';
+import { Input } from '@/components/ui/input';
 import { Head, useForm } from '@inertiajs/vue3';
 
 const props = defineProps<{
@@ -35,7 +35,7 @@ const submit = () => {
             <div>
                 <InputLabel for="email" value="Email" />
 
-                <TextInput
+                <Input
                     id="email"
                     type="email"
                     class="mt-1 block w-full"
@@ -51,7 +51,7 @@ const submit = () => {
             <div class="mt-4">
                 <InputLabel for="password" value="Password" />
 
-                <TextInput
+                <Input
                     id="password"
                     type="password"
                     class="mt-1 block w-full"
@@ -69,11 +69,11 @@ const submit = () => {
                     value="Confirm Password"
                 />
 
-                <TextInput
-                    id="password_confirmation"
+                <Input
+                    id="password"
                     type="password"
                     class="mt-1 block w-full"
-                    v-model="form.password_confirmation"
+                    v-model="form.password"
                     required
                     autocomplete="new-password"
                 />
