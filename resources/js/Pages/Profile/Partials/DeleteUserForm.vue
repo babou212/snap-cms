@@ -4,7 +4,7 @@ import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import Modal from '@/Components/Modal.vue';
 import SecondaryButton from '@/Components/SecondaryButton.vue';
-import { Input } from '@/components/ui/input';
+import { Input } from '@/Components/ui/input';
 import { useForm } from '@inertiajs/vue3';
 import { nextTick, ref } from 'vue';
 
