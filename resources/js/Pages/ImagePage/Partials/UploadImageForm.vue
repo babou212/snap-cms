@@ -9,6 +9,8 @@ import {
 } from '@/Components/ui/card';
 import { Input } from '@/Components/ui/input';
 import { Label } from '@/Components/ui/label';
+import { Toaster } from '@/Components/ui/toast';
+import { useToast } from '@/Components/ui/toast/use-toast';
 import { useForm } from '@inertiajs/vue3';
 
 const form = useForm({
@@ -17,9 +19,22 @@ const form = useForm({
 });
 
 function submit() {
-    form.post(route('upload.store'));
+    form.post(route('image.store'));
+    if (
+        form.image_description != null &&
+        form.image != null &&
+        !form.errors.image &&
+        !form.errors.image_description
+    ) {
+        toast({
+            title: 'Uploaded',
+            description: 'Successfully uploaded Image',
+        });
+    }
     form.reset();
 }
+
+const { toast } = useToast();
 </script>
 
 <template>
@@ -35,7 +50,7 @@ function submit() {
                 <form @submit.prevent="submit">
                     <div class="grid w-full items-center gap-4">
                         <div class="flex flex-col space-y-1.5">
-                            <Label for="name">Description</Label>
+                            <Label for="image_description">Description</Label>
                             <Input
                                 type="text"
                                 v-model="form.image_description"
@@ -48,7 +63,7 @@ function submit() {
                             </p>
                         </div>
                         <div class="flex flex-col space-y-1.5">
-                            <Label for="name">Image</Label>
+                            <Label for="image">Image</Label>
                             <Input
                                 type="file"
                                 @input="form.image = $event.target.files[0]"
@@ -64,7 +79,8 @@ function submit() {
                         >
                             {{ form.progress.percentage }}%
                         </progress>
-                        <Button type="submit">Submit</Button>
+                        <Toaster />
+                        <Button id="upload" type="submit">Submit</Button>
                     </div>
                 </form>
             </CardContent>

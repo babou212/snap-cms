@@ -19,16 +19,14 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/upload', function () {
-    return Inertia::render('Upload/Upload');
-})->middleware(['auth', 'verified'])->name('upload');
-
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::post('/upload-image', [ImageController::class, 'store'])->name('upload.store');
+    Route::get('/image', [ImageController::class, 'show'])->name('image');
+    Route::post('/image', [ImageController::class, 'store'])->name('image.store');
+    Route::delete('/image', [ImageController::class, 'destroy'])->name('image.destroy');
 });
 
 require __DIR__.'/auth.php';
